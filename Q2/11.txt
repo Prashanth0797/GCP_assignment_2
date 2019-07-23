@@ -1,0 +1,23 @@
+1. On the GCP console we click monitoring 
+2. Click on workspace settings and click worspace settings
+3. Open AWS console and create a role for another AWS account. Provide the Account ID and external ID. Add the policy 
+ReadOnlyAccess.
+4. Create the role and add the arn of the role in the description of the Role ARn field in the workaspace setting.
+5. Click on add AWS account
+6. In the GCP console create a service account with the roles Monitoring metric writer, Logs writer.
+7. Click on furnish a new private key.
+8. Provide the key type as JSON.
+9. Create an AWS EC2 instance with apache server installed and the port 80 opened
+10. ssh into this instance and create this variable GOOGLE_APPLICATION_CREDENTIALS="/etc/google/auth/application_default_credentials.json"	
+11. save the key as temp.json at the above location.
+12. sudo chown root:root "$GOOGLE_APPLICATION_CREDENTIALS" to restrict access to the service account
+13. sudo chmod 0400 "$GOOGLE_APPLICATION_CREDENTIALS"
+14. install Stackdriverr monitoring and logging agents
+15. curl -sSO https://dl.google.com/cloudagents/install-monitoring-agent.sh
+    sudo bash install-monitoring-agent.sh
+    curl -sSO https://dl.google.com/cloudagents/install-logging-agent.sh
+    sudo bash install-logging-agent.sh --structured
+16. Go back to the Stackdriver Monitoring console:
+17. Create uptime check
+18. Provide the url of the EC2 instance and test it.
+19. Crate an alert of the uptime check
